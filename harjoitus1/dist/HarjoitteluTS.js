@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapText = void 0;
 /**
  * Wrap the given text to lines of max n characters splitting from space.
  * Doesn't modify code block or TeX block contents.
@@ -73,4 +71,4 @@ function wrapText(s, n) {
     }
     return { modified: false, s: s };
 }
-exports.wrapText = wrapText;
+module.exports = wrapText;

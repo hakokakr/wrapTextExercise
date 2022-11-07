@@ -2,7 +2,7 @@
  * Wrap the given text to lines of max n characters splitting from space.
  * Doesn't modify code block or TeX block contents.
  */
-export function wrapText(s: string, n: number) {
+function wrapText(s: string, n: number) {
     if (n <= 0) {
         return {modified: false, s: s};
     }
@@ -70,3 +70,5 @@ export function wrapText(s: string, n: number) {
     }
     return {modified: false, s: s};
 }
+
+module.exports = wrapText;
