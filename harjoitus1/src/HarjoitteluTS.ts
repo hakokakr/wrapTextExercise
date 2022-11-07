@@ -7,7 +7,7 @@ function wrapText(s: string, n: number) {
         return {modified: false, s: s};
     }
     let rx: RegExp = /(```[^```]*```|\$\$[^\$\$]*\$\$)/g; // block contents that shouldn't be modified
-    const sepRxLines = s.split(rx);
+    const sepRxLines = s.toString().split(rx);
     let lines = [];
     let nextToRx: Boolean = false;
     for (let i = 0; i < sepRxLines.length; i++) {
