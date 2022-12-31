@@ -1,10 +1,3 @@
-let myText = `Turpis in eu mi bibendum neque egestas congue quisque.
-Should - wrap - this - even - if - there - is - hyphens -
-Aliquam etiam erat velit scelerisque in dictum.`;
-let myNum = 25;
-console.log(wrapText(myText, myNum).s);
-console.log(wrapText(myText, myNum).modified);
-
 /**
  * Wraps given text to lines, to maximum of given n characters.
  * Doesn't modify code block contents, TeX block contents, code lines (lines starting with 4 spaces). 
