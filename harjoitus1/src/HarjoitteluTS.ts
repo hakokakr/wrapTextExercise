@@ -9,7 +9,7 @@
  */
 function wrapText(text: string, maxLineLength: number, wrapStart: number = 0) {
     // If the given max line length is not desired: don't modify
-    if (maxLineLength <= 0) {
+    if (maxLineLength <= 0 || wrapStart < 0 || text.length < wrapStart) {
         return {modified: false, s: text};
     }
 
