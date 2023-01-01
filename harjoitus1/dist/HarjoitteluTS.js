@@ -1,11 +1,12 @@
 "use strict";
 /**
  * Wraps given text to lines, to maximum of given n characters.
- * Doesn't modify code block contents, TeX block contents, code lines (lines starting with 4 spaces).
+ * Doesn't modify code block contents, TeX block contents, code lines (lines starting with 4 spaces)
+ * or lines starting with hyphen.
  *
  * @param text - Text to be wrapped
  * @param maxLineLength - Maximum line length
- * @param wrapStart - Wrapping start point (might be useful to give the cursor position[in characters])
+ * @param wrapStart - Wrapping start point (might be useful to give the cursor position[character length])
  * @returns Was there any modifications & possibly wrapped text
  */
 function wrapText(text, maxLineLength, wrapStart = 0) {
