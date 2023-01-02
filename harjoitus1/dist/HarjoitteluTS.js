@@ -28,11 +28,20 @@ function wrapText(text, maxLineLength, wrapStart = 0) {
             result += section;
         }
         else {
-            // Wraps the text if needed and adds to result
-            const wrappedSection = wrapSection(section, maxLineLength);
-            result += wrappedSection.s;
-            // Keeps track of modifications
-            modified = modified || wrappedSection.modified;
+            // Breaks the block to lines
+            const lines = section.split("\n");
+            // Loops through all lines
+            for (let i = 0; i < lines.length; i++) {
+                // Wraps the text if needed and adds to result
+                const wrappedSection = wrapSection(lines[i], maxLineLength);
+                result += wrappedSection.s;
+                // Keeps track of modifications
+                modified = modified || wrappedSection.modified;
+                // Adds line break if it's not the last line
+                if (i < lines.length - 1) {
+                    result += "\n";
+                }
+            }
         }
     }
     // Returns boolean and text
@@ -55,8 +64,12 @@ function wrapSection(text, maxLineLength) {
     const words = text.split(" ");
     // Loops through the words
     for (const word of words) {
+        // Checks for empty string (multiple spaces or space after line break) and removes
+        if (word.length == 0) {
+            continue;
+        }
         // Checks if adding a word to the current line exceeds the max line length
-        if (currentLine.length + word.length > maxLineLength) {
+        if (maxLineLength < currentLine.length + word.trimStart().length + sep.length) {
             // Exceeds the max line length: adds current line to result with line break & clears current line
             result += currentLine + "\n";
             currentLine = "";
