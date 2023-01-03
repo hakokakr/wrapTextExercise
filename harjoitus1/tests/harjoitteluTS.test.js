@@ -164,6 +164,22 @@ code code code code code code code code
    }); 
 
 
+   it("Shouldn't modify code block", () => {
+      // assertions
+      var givenNumber = 10;
+      var testString = 
+`~~~
+code code code code code code code code
+~~~`;
+      var textShouldBe = testString.slice();
+      var modifiedShouldBe = false;
+      // test
+      var result = wrapText(testString, givenNumber);
+      expect(result.s).toBe(textShouldBe);
+      expect(result.modified).toBe(modifiedShouldBe);
+   }); 
+
+
    it("Shouldn't modify TeX block", () => {
       // assertions
       var givenNumber = 10;
