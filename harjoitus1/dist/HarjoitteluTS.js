@@ -18,7 +18,7 @@ function wrapText(text, maxLineLength, wrapStart = 0) {
     let result = "" + text.substring(0, wrapStart);
     let modified = false;
     // Contents that shouldn't be modified
-    let rx = /(```[^```]*```|\$\$[^\$\$]*\$\$|~~~[^~~~]*~~~|^    .*|^\s*-.*|\t.*$)/gm;
+    let rx = /(^```\n[\s\S]*?\n```|^\$\$\n[\s\S]*?\n\$\$|^~~~\n[\s\S]*?\n~~~|^    .*|^\s*-.*|^\t.*$)/gm;
     // Splits text into wrappable and non-wrappable blocks
     const sections = text.substring(wrapStart).split(rx);
     // Loops through all blocks
