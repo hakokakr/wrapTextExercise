@@ -27,17 +27,17 @@ describe("wrapText", () => {
      }); 
 
 
-   it("Should remove unnecessary spaces if they're not in the middle of a sentence", () => {
-   // assertions
-   var givenNumber = 8;
-   var testString = `Text  a text\n text      a      `;
-   var textShouldBe = `Text a\ntext\ntext a`;
-   var modifiedShouldBe = true;
-   // test
-   var result = wrapText(testString, givenNumber);
-   expect(result.s).toBe(textShouldBe);
-   expect(result.modified).toBe(modifiedShouldBe);
-   });
+   it("Should keep the last space", () => {
+      // assertions
+      var givenNumber = 10;
+      var testString = `Text text text text `;
+      var textShouldBe = `Text text\ntext text `;
+      var modifiedShouldBe = true;
+      // test
+      var result = wrapText(testString, givenNumber);
+      expect(result.s).toBe(textShouldBe);
+      expect(result.modified).toBe(modifiedShouldBe);
+      });
 
 
    it("Shouldn't wrap at the beginning, because starting point is set farther", () => {
@@ -114,6 +114,33 @@ describe("wrapText", () => {
       var testString = ``;
       var textShouldBe = testString.slice();
       var modifiedShouldBe = false;
+      // test
+      var result = wrapText(testString, givenNumber);
+      expect(result.s).toBe(textShouldBe);
+      expect(result.modified).toBe(modifiedShouldBe);
+   }); 
+
+
+   it("Shouldn't wrap the code line (beginning with tab)", () => {
+      // assertions
+      var givenNumber = 10;
+      var testString = 
+`Text text text text
+\tcode code code code
+Text text text text
+\tmultiple code lines...
+\tmultiple code lines...
+\tmultiple code lines...`;
+      var textShouldBe = 
+`Text text
+text text
+\tcode code code code
+Text text
+text text
+\tmultiple code lines...
+\tmultiple code lines...
+\tmultiple code lines...`;
+      var modifiedShouldBe = true;
       // test
       var result = wrapText(testString, givenNumber);
       expect(result.s).toBe(textShouldBe);

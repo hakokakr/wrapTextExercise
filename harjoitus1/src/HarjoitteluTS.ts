@@ -19,7 +19,7 @@ function wrapText(text: string, maxLineLength: number, wrapStart: number = 0) {
     let modified = false;
 
     // Contents that shouldn't be modified
-    let rx: RegExp = /(```[^```]*```|\$\$[^\$\$]*\$\$|~~~[^~~~]*~~~|^    .*|^\s*-.*)/gm;
+    let rx: RegExp = /(```[^```]*```|\$\$[^\$\$]*\$\$|~~~[^~~~]*~~~|^    .*|^\s*-.*|^\t.*$)/gm;
 
     // Splits text into wrappable and non-wrappable blocks
     const sections = text.substring(wrapStart).split(rx);
@@ -71,12 +71,8 @@ function wrapSection(text: string, maxLineLength: number) {
 
     // Loops through the words
     for (const word of words) {
-        // Checks for empty string (multiple spaces or space after line break) and skips them
-        if (word.length == 0) {
-            continue;
-        }
         // Checks if adding a word to the current line exceeds the max line length
-        if (maxLineLength < currentLine.length + word.trimStart().length + sep.length) {
+        if (maxLineLength < currentLine.length + word.length + sep.length) {
             // Exceeds the max line length: adds current line to result with line break & clears current line
             result += currentLine + "\n";
             currentLine = "";
