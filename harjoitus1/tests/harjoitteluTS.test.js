@@ -164,6 +164,30 @@ code code code code code code code code
    }); 
 
 
+   it("Shouldn't modify code block or break the code block even if there's any kind of character inside it", () => {
+      // assertions
+      var givenNumber = 10;
+      var testString = 
+`\`\`\`
+   \`\`\`
+      Here's a code block inside of a code block...
+   \`\`\`
+   $$
+      Math inside of a code block...
+   $$
+   ~~~
+      tildes inside of a code block...
+   ~~~
+\`\`\``;
+      var textShouldBe = testString.slice();
+      var modifiedShouldBe = false;
+      // test
+      var result = wrapText(testString, givenNumber);
+      expect(result.s).toBe(textShouldBe);
+      expect(result.modified).toBe(modifiedShouldBe);
+   }); 
+
+
    it("Shouldn't modify code block", () => {
       // assertions
       var givenNumber = 10;
