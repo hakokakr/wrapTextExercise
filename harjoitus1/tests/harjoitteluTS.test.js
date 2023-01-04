@@ -121,6 +121,49 @@ describe("wrapText", () => {
    }); 
 
 
+   it("Shouldn't modify the the given string, because given number <= 0 (string is empty)", () => {
+      // assertions
+      var givenNumber = 10;
+      var testString = 
+`\`\`\`\` {something}
+text text text text
+\`\`\`
+text text text text
+\`\`\`
+text text text text
+\`\`\`\``;
+      var textShouldBe = testString.slice();
+      var modifiedShouldBe = false;
+      // test
+      var result = wrapText(testString, givenNumber);
+      expect(result.s).toBe(textShouldBe);
+      expect(result.modified).toBe(modifiedShouldBe);
+   }); 
+
+
+   it("Shouldn't modify the code block)", () => {
+      // assertions
+      var givenNumber = 10;
+      var testString = 
+`- esimerkki:
+
+    \`\`\`
+    previousTask:
+     taskid: demo_t1
+     requireLock: true
+     hideText: Sinun täytyy ensin lukita ensimmäinen tehtävällä katsomalla sen mallivastaus ennen tämän tehtävän aukeamista
+     unlockText: Avaa tehtävä 2
+     unlockError: Tehtävää ei voitu avata. Painoithan ensimmäisestä tehtävästä kohtaa Näytä mallivastaus?
+    \`\`\``;
+      var textShouldBe = testString.slice();
+      var modifiedShouldBe = false;
+      // test
+      var result = wrapText(testString, givenNumber);
+      expect(result.s).toBe(textShouldBe);
+      expect(result.modified).toBe(modifiedShouldBe);
+   }); 
+
+
    it("Shouldn't wrap the code line (beginning with tab)", () => {
       // assertions
       var givenNumber = 10;
